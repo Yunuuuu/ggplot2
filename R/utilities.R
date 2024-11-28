@@ -15,6 +15,14 @@ scales::alpha
   if (!is.waiver(a)) a else b
 }
 
+#' Replace NAs with specified values
+#' @param value A single value.
+#' @noRd
+replace_na <- function(x, value) {
+    value <- vec_cast(x = value, to = x, x_arg = "value", to_arg = "x")
+    vec_assign(x, vec_detect_missing(x), value)
+}
+
 # Check required aesthetics are present
 # This is used by geoms and stats to give a more helpful error message
 # when required aesthetics are missing.

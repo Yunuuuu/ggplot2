@@ -693,8 +693,7 @@ ScaleContinuous <- ggproto("ScaleContinuous", Scale,
     uniq <- unique0(x)
     pal <- self$palette(uniq)
     scaled <- pal[match(x, uniq)]
-
-    ifelse(!is.na(scaled), scaled, self$na.value)
+    replace_na(scaled, self$na.value)
   },
 
   rescale = function(self, x, limits = self$get_limits(), range = limits) {
@@ -1216,7 +1215,7 @@ ScaleBinned <- ggproto("ScaleBinned", Scale,
       }
 
       scaled <- pal[x_binned]
-      ifelse(!is.na(scaled), scaled, self$na.value)
+      replace_na(scaled, self$na.value)
     }
   },
 
